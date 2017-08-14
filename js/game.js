@@ -1,9 +1,22 @@
 var Game = function() {
   this.board = new Board();
-  this.addTile();
-  this.addTile();
 }
 
+Game.prototype.moveTilesUp = function() {
+
+}
+
+Game.prototype.moveTilesDown = function() {
+
+}
+
+Game.prototype.moveTilesRight = function() {
+
+}
+
+Game.prototype.moveTilesLeft = function() {
+
+}
 
 // Possible functions
 // game over?
