@@ -1,3 +1,5 @@
+var game;
+
 function startGame() {
   console.log("start game");
   game = new Game();
