@@ -5,8 +5,13 @@ var Board = function() {
   this.addTile();
 }
 
+Board.prototype.nukeBoard = function() {
+  $('.grid-cell').html('');
+}
+
 Board.prototype.displayBoard = function() {
   // iterate through tiles ARRAY and change html of index value using div ID
+  this.nukeBoard();
   this.tiles.forEach(function(tile) {
     $('#' + tile.index).html(tile.value);
   });

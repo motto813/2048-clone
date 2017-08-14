@@ -27,6 +27,7 @@ Game.prototype.moveTilesRight = function() {
       tile.index ++;
     }
   });
+  board.displayBoard();
 }
 
 Game.prototype.moveTilesLeft = function() {
