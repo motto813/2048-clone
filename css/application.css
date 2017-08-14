@@ -32,25 +32,27 @@ body {
 }
 
 .grid-cell {
-    width: 106.25px;
-    height: 106.25px;
-    margin-right: 15px;
-    float: left;
-    border-radius: 3px;
-    background: rgba(255, 0, 0, 0.8);;
+  width: 106.25px;
+  height: 106.25px;
+  margin-right: 15px;
+  float: left;
+  border-radius: 3px;
+  background: rgba(255, 0, 0, 0.8);
+  text-align: center;
+  font-size: 3.0em;
 }
 
 .game-container {
-    margin-top: 80px;
-    position: relative;
-    padding: 15px;
-    background: #4c71ce;
-    border-radius: 6px;
-    width: 500px;
-    height: 500px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+  margin-top: 80px;
+  position: relative;
+  padding: 15px;
+  background: #4c71ce;
+  border-radius: 6px;
+  width: 500px;
+  height: 500px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .grid-row:last-child {
