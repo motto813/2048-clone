@@ -1,4 +1,5 @@
 var Tile = function(index) {
+  this.index = index;
   this.row = this.getRow(index);
   this.column = this.getColumn(index);
   this.value = 2;

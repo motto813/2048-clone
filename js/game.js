@@ -1,5 +1,6 @@
 var Game = function() {
   this.board = new Board();
+  this.board.displayBoard();
 }
 
 Game.prototype.moveTilesUp = function() {

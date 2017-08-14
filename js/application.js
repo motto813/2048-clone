@@ -1,4 +1,5 @@
 function startGame() {
+  console.log("start game");
   game = new Game();
   Mousetrap.bind('up', game.moveTilesUp);
   Mousetrap.bind('down', game.moveTilesDown);
