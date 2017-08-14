@@ -7,7 +7,7 @@ var Board = function() {
 
 Board.prototype.displayBoard = function() {
   // iterate through tiles ARRAY and change html of index value using div ID
-  _.each(this.tiles, function(tile) {
+  this.tiles.forEach(function(tile) {
     $('#' + tile.index).html(tile.value);
   });
 }
@@ -18,7 +18,7 @@ Board.prototype.addTile = function() {
 }
 
 Board.prototype.randomOpenGridCell = function() {
-  return this.openGridCells()[Math.floor(Math.random() * this.openGridCells().length)]
+  return this.openGridCells()[Math.floor(Math.random() * this.openGridCells().length)];
 }
 
 Board.prototype.occupiedGridCells = function() {
