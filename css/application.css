@@ -4,6 +4,15 @@ body {
   margin: 0 auto;
 }
 
+#page-title {
+  position: relative;
+  top: 30px;
+  margin: 0 auto;
+  text-align: center;
+  color: purple;
+  font-size: 3.0em;
+}
+
 .grid-row {
   margin-bottom: 15px;
 }
@@ -22,7 +31,7 @@ body {
 }
 
 .game-container {
-    margin-top: 40px;
+    margin-top: 60px;
     position: relative;
     padding: 15px;
     background: #4c71ce;
