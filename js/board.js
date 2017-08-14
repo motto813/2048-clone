@@ -23,7 +23,7 @@ Board.prototype.randomOpenGridCell = function() {
 
 Board.prototype.occupiedGridCells = function() {
   var usedArr = [];
-  _.each(this.tiles, function(tile) {
+  this.tiles.forEach(function(tile) {
     usedArr.push(tile.index);
   });
   return usedArr;
