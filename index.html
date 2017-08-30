@@ -6,21 +6,62 @@
     differences in how form elements appear between Firefox and IE
     See: http://necolas.github.com/normalize.css/
   -->
-  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="css/normalize.css">
   <!--
     application.css is where you put your styles
   -->
-  <link rel="stylesheet" href="/css/application.css">
+  <link rel="stylesheet" href="css/application.css">
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="/js/mousetrap.js"></script>
-  <script src="/js/underscore.js"></script>
-  <script src="/js/game.js"></script>
-  <script src="/js/application.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="js/mousetrap.js"></script>
+  <script src="js/underscore.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/tile.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/application.js"></script>
 
   <title>256!</title>
 </head>
 <body>
+  <header>
+    <h1 id="page-title">256!</h1>
+  </header>
 
+  <div class="new-game-button">
+    <button type="click">New Game</button>
+  </div>
+
+  <div class="game-container">
+    <div class="grid-container">
+      <div class="grid-row">
+        <div id="0" class="grid-cell"></div>
+        <div id="1" class="grid-cell"></div>
+        <div id="2" class="grid-cell"></div>
+        <div id="3" class="grid-cell"></div>
+      </div>
+      <div class="grid-row">
+        <div id="4" class="grid-cell"></div>
+        <div id="5" class="grid-cell"></div>
+        <div id="6" class="grid-cell"></div>
+        <div id="7" class="grid-cell"></div>
+      </div>
+      <div class="grid-row">
+        <div id="8" class="grid-cell"></div>
+        <div id="9" class="grid-cell"></div>
+        <div id="10" class="grid-cell"></div>
+        <div id="11" class="grid-cell"></div>
+      </div>
+      <div class="grid-row">
+        <div id="12" class="grid-cell"></div>
+        <div id="13" class="grid-cell"></div>
+        <div id="14" class="grid-cell"></div>
+        <div id="15" class="grid-cell"></div>
+      </div>
+    </div>
+
+    <div class="tile-container">
+
+    </div>
+  </div>
 </body>
 </html>
