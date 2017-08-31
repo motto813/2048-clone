@@ -28,19 +28,19 @@ Game.prototype.moveTilesRight = function() {
     }
   });
   board.displayBoard();
-};
+}
 
 Game.prototype.moveTilesLeft = function() {
 
-};
+}
 
 Game.prototype.moveTilesUp = function() {
 
-};
+}
 
 Game.prototype.moveTilesDown = function() {
 
-};
+}
 
 
 // Possible functions
