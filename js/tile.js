@@ -3,7 +3,7 @@ var Tile = function(index) {
   this.row = this.getRow(index);
   this.column = this.getColumn(index);
   this.value = 2;
-}
+};
 
 Tile.prototype.increaseValue = function() {
   this.value *= 2;

@@ -3,7 +3,7 @@ var moveRightEndPoints = [3, 7, 11, 15];
 var Game = function() {
   this.board = new Board();
   this.board.displayBoard();
-}
+};
 
 Game.prototype.moveTilesRight = function() {
   // increase index of all tiles by one UNTIL
@@ -28,19 +28,19 @@ Game.prototype.moveTilesRight = function() {
     }
   });
   board.displayBoard();
-}
+};
 
 Game.prototype.moveTilesLeft = function() {
 
-}
+};
 
 Game.prototype.moveTilesUp = function() {
 
-}
+};
 
 Game.prototype.moveTilesDown = function() {
 
-}
+};
 
 
 // Possible functions

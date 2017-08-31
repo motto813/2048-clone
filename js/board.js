@@ -3,7 +3,7 @@ var Board = function() {
   this.tiles = [];
   this.addTile();
   this.addTile();
-}
+};
 
 Board.prototype.nukeBoard = function() {
   $('.grid-cell').html('');
@@ -42,4 +42,4 @@ Array.prototype.diff = function(usedArr) {
   return this.filter(function(index) {
     return usedArr.indexOf(index) < 0;
   });
-};
+}
