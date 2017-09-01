@@ -71,7 +71,7 @@ Board.prototype.createSlicesLeft = function() {
     });
     this.slices[i] = slice;
   }
-  this.sortForleftAndUp();
+  this.sortForLeftAndUp();
 }
 
 Board.prototype.createSlicesDown = function() {
@@ -87,11 +87,47 @@ Board.prototype.createSlicesDown = function() {
 Board.prototype.createSlicesUp = function() {
   for ( var i = 0; i < this.slices.length; i++ ) {
     var slice = this.tiles.filter(function(tile) {
-      return tile.row === i;
+      return tile.column === i;
     });
     this.slices[i] = slice;
   }
-  this.sortForleftAndUp();
+  this.sortForLeftAndUp();
+}
+
+Board.prototype.shiftTilesRight = function() {
+  this.slices.forEach(function(slice) {
+    for ( var i = 0; i < slice.length; i++ ) {
+      slice[i].column = 3 - i;
+      slice[i].setIndex();
+    }
+  });
+}
+
+Board.prototype.shiftTilesLeft = function() {
+  this.slices.forEach(function(slice) {
+    for ( var i = 0; i < slice.length; i++ ) {
+      slice[i].column = i;
+      slice[i].setIndex();
+    }
+  });
+}
+
+Board.prototype.shiftTilesDown = function() {
+  this.slices.forEach(function(slice) {
+    for ( var i = 0; i < slice.length; i++ ) {
+      slice[i].row = 3 - i;
+      slice[i].setIndex();
+    }
+  });
+}
+
+Board.prototype.shiftTilesUp = function() {
+  this.slices.forEach(function(slice) {
+    for ( var i = 0; i < slice.length; i++ ) {
+      slice[i].row = i;
+      slice[i].setIndex();
+    }
+  });
 }
 
 Board.prototype.sortForRightAndDown = function() {
@@ -102,7 +138,7 @@ Board.prototype.sortForRightAndDown = function() {
   });
 }
 
-Board.prototype.sortForleftAndUp = function() {
+Board.prototype.sortForLeftAndUp = function() {
   this.slices.map(function(slice) {
     return slice.sort(function(a, b) {
       return a.index - b.index;
@@ -117,7 +153,7 @@ Board.prototype.combinePossibleCells = function() {
         slice[i].increaseValue();
         this.removeCombinedTile(slice[i + 1]);
         slice.splice(i + 1, 1);
-        i++;
+        // i++;
       }
     }
   }, this);
@@ -126,14 +162,5 @@ Board.prototype.combinePossibleCells = function() {
 Board.prototype.removeCombinedTile = function(removeTile) {
   this.tiles = this.tiles.filter(function(tile) {
     return tile.index !== removeTile.index;
-  });
-}
-
-Board.prototype.shiftTilesRight = function() {
-  this.slices.forEach(function(slice) {
-    for ( var i = 0; i < slice.length; i++ ) {
-      slice[i].column = 3 - i;
-      slice[i].setIndex();
-    }
   });
 }

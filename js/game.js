@@ -26,15 +26,24 @@ Game.prototype.moveTilesRight = function() {
 }
 
 Game.prototype.moveTilesLeft = function() {
-
+  this.board.createSlicesLeft();
+  this.board.combinePossibleCells();
+  this.board.shiftTilesLeft();
+  this.moveGameForward();
 }
 
 Game.prototype.moveTilesUp = function() {
-
+  this.board.createSlicesUp();
+  this.board.combinePossibleCells();
+  this.board.shiftTilesUp();
+  this.moveGameForward();
 }
 
 Game.prototype.moveTilesDown = function() {
-
+  this.board.createSlicesDown();
+  this.board.combinePossibleCells();
+  this.board.shiftTilesDown();
+  this.moveGameForward();
 }
 
 
