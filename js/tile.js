@@ -16,3 +16,7 @@ Tile.prototype.getRow = function(index) {
 Tile.prototype.getColumn = function(index) {
   return index % 4;
 }
+
+Tile.prototype.setIndex = function(row, column) {
+  this.index = row * 4 + column;
+}

@@ -84,7 +84,7 @@ Board.prototype.combinePossibleCells = function() {
   this.rows.forEach(function(row) {
     for ( var i = 0; i < row.length - 1; i++ ) {
       if ( row[i].value === row[i + 1].value ) {
-        row[i].value *= 2;
+        row[i].increaseValue();
         this.removeCombinedTile(row[i + 1]);
         i++;
       }

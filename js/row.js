@@ -1,3 +1,0 @@
-var Row = function() {
-  this.
-};
