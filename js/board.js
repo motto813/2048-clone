@@ -59,10 +59,18 @@ Board.prototype.createRowsRight = function() {
     });
     this.rows[i] = row;
   }
-  this.sortForRightAndDown();
+  this.sortForRightAndUp();
 }
 
-Board.prototype.sortForRightAndDown = function() {
+Board.prototype.sortForRightAndUp = function() {
+  this.rows.map(function(row) {
+    return row.sort(function(a, b) {
+      return b.index - a.index;
+    });
+  });
+}
+
+Board.prototype.sortForleftAndDown = function() {
   this.rows.map(function(row) {
     return row.sort(function(a, b) {
       return a.index - b.index;
