@@ -5,14 +5,14 @@ var Board = function() {
   // this.addTile();
 
   this.tiles = [];
-  this.allGridCells = this.createEmptyBoard();
-  // this.rows = [];
+  this.allGridCells = this.arrayOfZeroes(16);
+  this.rows = this.arrayOfZeroes(4);
 
   this.initiateGridCells();
 };
 
-Board.prototype.createEmptyBoard = function() {
-  return Array.apply(null, Array(16)).map(Number.prototype.valueOf, 0);
+Board.prototype.arrayOfZeroes = function(num) {
+  return Array.apply(null, Array(num)).map(Number.prototype.valueOf, 0);
 }
 
 Board.prototype.initiateGridCells = function() {
@@ -23,9 +23,9 @@ Board.prototype.initiateGridCells = function() {
 
 Board.prototype.populateGridCells = function() {
   this.tiles.forEach(function(tile) {
-    console.log(tile);
-    console.log(tile.index);
-    console.log(this.allGridCells);
+    // console.log(tile);
+    // console.log(tile.index);
+    // console.log(this.allGridCells);
     this.allGridCells[tile.index] = tile;
   }, this);
 }
@@ -74,6 +74,25 @@ Board.prototype.openIndices = function() {
   // });
 }
 
+Board.prototype.createRowsRight = function() {
+  for ( var i = 0; i < this.rows.length; i++ ) {
+    // var row = [];
+    var row = this.tiles.filter(function(tile) {
+      return tile.row === i;
+    });
+    this.rows[i] = row;
+  }
+  this.sortForRightAndDown();
+}
+
+Board.prototype.sortForRightAndDown = function() {
+  this.rows.map(function(row) {
+    return row.sort(function(a, b) {
+      return a.index - b.index;
+    });
+  });
+}
+
 // Board.prototype.occupiedGridCells = function() {
 //   var usedArr = [];
 //   this.tiles.forEach(function(tile) {
@@ -86,8 +105,4 @@ Board.prototype.openIndices = function() {
 //   return this.filter(function(index) {
 //     return usedArr.indexOf(index) < 0;
 //   });
-// }
-
-// Board.prototype.createRowsRight = function() {
-//   this.rows.push(new Row);
 // }

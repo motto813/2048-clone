@@ -9,6 +9,7 @@ Game.prototype.moveGameForward = function() {
   this.board.addTile();
   this.board.populateGridCells();
   this.board.displayBoard();
+  // this.board.rows.length = 0;
 }
 
 Game.prototype.moveTilesRight = function() {
@@ -33,6 +34,7 @@ Game.prototype.moveTilesRight = function() {
   //     tile.index ++;
   //   }
   // });
+  this.board.createRowsRight();
   this.moveGameForward();
 }
 
