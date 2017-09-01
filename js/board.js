@@ -16,20 +16,23 @@ Board.prototype.createEmptyBoard = function() {
 }
 
 Board.prototype.initiateGridCells = function() {
-  // this.addTile();
-  // this.addTile();
-  // this.populateGridCells();
+  this.addTile();
+  this.addTile();
+  this.populateGridCells();
 }
 
 Board.prototype.populateGridCells = function() {
   this.tiles.forEach(function(tile) {
-
-  });
+    console.log(tile);
+    console.log(tile.index);
+    // console.log(allGridCells);
+    this.allGridCells[tile.index] = tile;
+  }, this);
 }
 
-Board.prototype.fillInBlanks = function() {
+// Board.prototype.fillInBlanks = function() {
 
-}
+// }
 
 Board.prototype.nukeBoard = function() {
   $('.grid-cell').html('');
@@ -45,30 +48,45 @@ Board.prototype.displayBoard = function() {
 
 Board.prototype.addTile = function() {
   // make a NEW TILE by passing in a sampled value from OPEN GRID CELLS
-  this.tiles.push(new Tile(this.randomOpenGridCell()));
+  this.tiles.push(new Tile(this.randomOpenIndex()));
 }
 
-Board.prototype.randomOpenGridCell = function() {
-  return this.openGridCells()[Math.floor(Math.random() * this.openGridCells().length)];
+Board.prototype.randomOpenIndex = function() {
+  return this.openIndices()[Math.floor(Math.random() * this.openIndices().length)];
+  // return this.allGridCells.filter(function(cell) {
+  //   return cell === 0;
+  // });
 }
 
-Board.prototype.occupiedGridCells = function() {
-  var usedArr = [];
-  this.tiles.forEach(function(tile) {
-    usedArr.push(tile.index);
-  });
-  return usedArr;
+// Board.prototype.occupiedGridCells = function() {
+//   var usedArr = [];
+//   this.tiles.forEach(function(tile) {
+//     usedArr.push(tile.index);
+//   });
+//   return usedArr;
+// }
+
+Board.prototype.openIndices = function() {
+  // return this.gridCells.diff(this.occupiedGridCells());
+  var openIndices = [];
+  for ( var i = 0; i < this.allGridCells.length; i++ ) {
+    if ( this.allGridCells[i] === 0 ) {
+      openIndices.push(i);
+    }
+  }
+  return openIndices;
+  // this.allGridCells.forEach(function(cell) {
+  //   if ( cell === 0 ) {
+  //     openIndices.push()
+  //   }
+  // });
 }
 
-Board.prototype.openGridCells = function() {
-  return this.gridCells.diff(this.occupiedGridCells());
-}
-
-Array.prototype.diff = function(usedArr) {
-  return this.filter(function(index) {
-    return usedArr.indexOf(index) < 0;
-  });
-}
+// Array.prototype.diff = function(usedArr) {
+//   return this.filter(function(index) {
+//     return usedArr.indexOf(index) < 0;
+//   });
+// }
 
 // Board.prototype.createRowsRight = function() {
 //   this.rows.push(new Row);
