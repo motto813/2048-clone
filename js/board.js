@@ -19,6 +19,7 @@ Board.prototype.initiateGridCells = function() {
 }
 
 Board.prototype.populateGridCells = function() {
+  this.allGridCells = this.arrayOfZeroes(16);
   this.tiles.forEach(function(tile) {
     this.allGridCells[tile.index] = tile;
   }, this);
@@ -80,5 +81,19 @@ Board.prototype.sortForleftAndUp = function() {
 }
 
 Board.prototype.combinePossibleCells = function() {
-  // this.rows.
+  this.rows.forEach(function(row) {
+    for ( var i = 0; i < row.length - 1; i++ ) {
+      if ( row[i].value === row[i + 1].value ) {
+        row[i].value *= 2;
+        this.removeCombinedTile(row[i + 1]);
+        i++;
+      }
+    }
+  }, this);
+}
+
+Board.prototype.removeCombinedTile = function(removeTile) {
+  this.tiles = this.tiles.filter(function(tile) {
+    return tile.index !== removeTile.index;
+  });
 }

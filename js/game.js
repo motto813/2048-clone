@@ -14,7 +14,7 @@ Game.prototype.moveGameForward = function() {
 
 Game.prototype.playCurrentTurn = function() {
   this.board.combinePossibleCells();
-  // this.board.slideTilesInDirection();
+  // this.board.shiftTiles();
 }
 
 Game.prototype.moveTilesRight = function() {
