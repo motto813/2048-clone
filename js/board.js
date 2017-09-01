@@ -2,7 +2,7 @@ var Board = function() {
 
   this.tiles = [];
   this.allGridCells = this.arrayOfZeroes(16);
-  this.rows = this.arrayOfZeroes(4);
+  this.slices = this.arrayOfZeroes(4);
 
   this.initiateGridCells();
 };
@@ -54,18 +54,48 @@ Board.prototype.openIndices = function() {
   return openIndices;
 }
 
-Board.prototype.createRowsRight = function() {
-  for ( var i = 0; i < this.rows.length; i++ ) {
+Board.prototype.createSlicesRight = function() {
+  for ( var i = 0; i < this.slices.length; i++ ) {
     var row = this.tiles.filter(function(tile) {
       return tile.row === i;
     });
-    this.rows[i] = row;
+    this.slices[i] = row;
   }
   this.sortForRightAndDown();
 }
 
+Board.prototype.createSlicesLeft = function() {
+  for ( var i = 0; i < this.slices.length; i++ ) {
+    var row = this.tiles.filter(function(tile) {
+      return tile.row === i;
+    });
+    this.slices[i] = row;
+  }
+  this.sortForleftAndUp();
+}
+
+Board.prototype.createSlicesDown = function() {
+  for ( var i = 0; i < this.slices.length; i++ ) {
+    var row = this.tiles.filter(function(tile) {
+      return tile.column === i;
+    });
+    this.slices[i] = row;
+  }
+  this.sortForRightAndDown();
+}
+
+Board.prototype.createSlicesUp = function() {
+  for ( var i = 0; i < this.slices.length; i++ ) {
+    var row = this.tiles.filter(function(tile) {
+      return tile.row === i;
+    });
+    this.slices[i] = row;
+  }
+  this.sortForleftAndUp();
+}
+
 Board.prototype.sortForRightAndDown = function() {
-  this.rows.map(function(row) {
+  this.slices.map(function(row) {
     return row.sort(function(a, b) {
       return b.index - a.index;
     });
@@ -73,7 +103,7 @@ Board.prototype.sortForRightAndDown = function() {
 }
 
 Board.prototype.sortForleftAndUp = function() {
-  this.rows.map(function(row) {
+  this.slices.map(function(row) {
     return row.sort(function(a, b) {
       return a.index - b.index;
     });
@@ -81,7 +111,7 @@ Board.prototype.sortForleftAndUp = function() {
 }
 
 Board.prototype.combinePossibleCells = function() {
-  this.rows.forEach(function(row) {
+  this.slices.forEach(function(row) {
     for ( var i = 0; i < row.length - 1; i++ ) {
       if ( row[i].value === row[i + 1].value ) {
         row[i].increaseValue();
@@ -100,7 +130,7 @@ Board.prototype.removeCombinedTile = function(removeTile) {
 }
 
 Board.prototype.shiftTilesRight = function() {
-  this.rows.forEach(function(row) {
+  this.slices.forEach(function(row) {
     for ( var i = 0; i < row.length; i++ ) {
       row[i].column = 3 - i;
       row[i].setIndex();

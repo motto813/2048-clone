@@ -19,7 +19,7 @@ Game.prototype.playCurrentTurn = function() {
 
 Game.prototype.moveTilesRight = function() {
   console.log(this);
-  this.board.createRowsRight();
+  this.board.createSlicesRight();
   this.board.combinePossibleCells();
   this.board.shiftTilesRight();
   this.moveGameForward();
