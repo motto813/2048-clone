@@ -1,9 +1,35 @@
 var Board = function() {
-  this.gridCells = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+  // this.gridCells = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+  // this.tiles = [];
+  // this.addTile();
+  // this.addTile();
+
   this.tiles = [];
-  this.addTile();
-  this.addTile();
+  this.allGridCells = this.createEmptyBoard();
+  this.rows = [];
+
+  this.initiateGridCells();
 };
+
+Board.prototype.createEmptyBoard = function() {
+  return Array.apply(null, Array(16)).map(Number.prototype.valueOf, 0);
+}
+
+Board.prototype.initiateGridCells = function() {
+  // this.addTile();
+  // this.addTile();
+  // this.populateGridCells();
+}
+
+Board.prototype.populateGridCells = function() {
+  this.tiles.forEach(function(tile) {
+
+  });
+}
+
+Board.prototype.fillInBlanks = function() {
+
+}
 
 Board.prototype.nukeBoard = function() {
   $('.grid-cell').html('');
@@ -43,3 +69,7 @@ Array.prototype.diff = function(usedArr) {
     return usedArr.indexOf(index) < 0;
   });
 }
+
+// Board.prototype.createRowsRight = function() {
+//   this.rows.push(new Row);
+// }
