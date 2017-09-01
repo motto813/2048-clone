@@ -1,5 +1,3 @@
-var moveRightEndPoints = [3, 7, 11, 15];
-
 var Game = function() {
   this.board = new Board();
   this.board.displayBoard();
@@ -7,7 +5,11 @@ var Game = function() {
 
 Game.prototype.moveGameForward = function() {
   // this.playCurrentTurn();
+  // console.log(this.board.tiles.length);
   this.board.addTile();
+  // console.log(this.board.tiles.length);
+  // console.log(this.board);
+  this.board.slices = this.board.arrayOfZeroes(4);
   this.board.populateGridCells();
   this.board.displayBoard();
 }
@@ -18,7 +20,6 @@ Game.prototype.playCurrentTurn = function() {
 }
 
 Game.prototype.moveTilesRight = function() {
-  console.log(this);
   this.board.createSlicesRight();
   this.board.combinePossibleCells();
   this.board.shiftTilesRight();

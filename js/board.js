@@ -152,8 +152,14 @@ Board.prototype.combinePossibleCells = function() {
       if ( slice[i].value === slice[i + 1].value ) {
         slice[i].increaseValue();
         this.removeCombinedTile(slice[i + 1]);
-        slice.splice(i + 1, 1);
-        // i++;
+        // console.log(this.allGridCells);
+        console.log("current tiles below");
+        console.log(slice[i]);
+        console.log(slice[i + 1]);
+        // this.allGridCells.splice(slice[i + 1].index, 1, 0);
+        // console.log(this.allGridCells);
+        // slice.splice(i + 1, 1);
+        i++;
       }
     }
   }, this);
@@ -163,4 +169,5 @@ Board.prototype.removeCombinedTile = function(removeTile) {
   this.tiles = this.tiles.filter(function(tile) {
     return tile.index !== removeTile.index;
   });
+  this.allGridCells.splice(removeTile.index, 1, 0);
 }
