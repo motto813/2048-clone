@@ -56,67 +56,67 @@ Board.prototype.openIndices = function() {
 
 Board.prototype.createSlicesRight = function() {
   for ( var i = 0; i < this.slices.length; i++ ) {
-    var row = this.tiles.filter(function(tile) {
+    var slice = this.tiles.filter(function(tile) {
       return tile.row === i;
     });
-    this.slices[i] = row;
+    this.slices[i] = slice;
   }
   this.sortForRightAndDown();
 }
 
 Board.prototype.createSlicesLeft = function() {
   for ( var i = 0; i < this.slices.length; i++ ) {
-    var row = this.tiles.filter(function(tile) {
+    var slice = this.tiles.filter(function(tile) {
       return tile.row === i;
     });
-    this.slices[i] = row;
+    this.slices[i] = slice;
   }
   this.sortForleftAndUp();
 }
 
 Board.prototype.createSlicesDown = function() {
   for ( var i = 0; i < this.slices.length; i++ ) {
-    var row = this.tiles.filter(function(tile) {
+    var slice = this.tiles.filter(function(tile) {
       return tile.column === i;
     });
-    this.slices[i] = row;
+    this.slices[i] = slice;
   }
   this.sortForRightAndDown();
 }
 
 Board.prototype.createSlicesUp = function() {
   for ( var i = 0; i < this.slices.length; i++ ) {
-    var row = this.tiles.filter(function(tile) {
+    var slice = this.tiles.filter(function(tile) {
       return tile.row === i;
     });
-    this.slices[i] = row;
+    this.slices[i] = slice;
   }
   this.sortForleftAndUp();
 }
 
 Board.prototype.sortForRightAndDown = function() {
-  this.slices.map(function(row) {
-    return row.sort(function(a, b) {
+  this.slices.map(function(slice) {
+    return slice.sort(function(a, b) {
       return b.index - a.index;
     });
   });
 }
 
 Board.prototype.sortForleftAndUp = function() {
-  this.slices.map(function(row) {
-    return row.sort(function(a, b) {
+  this.slices.map(function(slice) {
+    return slice.sort(function(a, b) {
       return a.index - b.index;
     });
   });
 }
 
 Board.prototype.combinePossibleCells = function() {
-  this.slices.forEach(function(row) {
-    for ( var i = 0; i < row.length - 1; i++ ) {
-      if ( row[i].value === row[i + 1].value ) {
-        row[i].increaseValue();
-        this.removeCombinedTile(row[i + 1]);
-        row.splice(i + 1, 1);
+  this.slices.forEach(function(slice) {
+    for ( var i = 0; i < slice.length - 1; i++ ) {
+      if ( slice[i].value === slice[i + 1].value ) {
+        slice[i].increaseValue();
+        this.removeCombinedTile(slice[i + 1]);
+        slice.splice(i + 1, 1);
         i++;
       }
     }
@@ -130,10 +130,10 @@ Board.prototype.removeCombinedTile = function(removeTile) {
 }
 
 Board.prototype.shiftTilesRight = function() {
-  this.slices.forEach(function(row) {
-    for ( var i = 0; i < row.length; i++ ) {
-      row[i].column = 3 - i;
-      row[i].setIndex();
+  this.slices.forEach(function(slice) {
+    for ( var i = 0; i < slice.length; i++ ) {
+      slice[i].column = 3 - i;
+      slice[i].setIndex();
     }
   });
 }
