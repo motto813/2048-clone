@@ -6,7 +6,7 @@ var Game = function() {
 };
 
 Game.prototype.moveGameForward = function() {
-  this.playCurrentTurn();
+  // this.playCurrentTurn();
   this.board.addTile();
   this.board.populateGridCells();
   this.board.displayBoard();
@@ -14,12 +14,14 @@ Game.prototype.moveGameForward = function() {
 
 Game.prototype.playCurrentTurn = function() {
   this.board.combinePossibleCells();
-  // this.board.shiftTiles();
+  this.board.shiftTiles();
 }
 
 Game.prototype.moveTilesRight = function() {
   console.log(this);
   this.board.createRowsRight();
+  this.board.combinePossibleCells();
+  this.board.shiftTilesRight();
   this.moveGameForward();
 }
 

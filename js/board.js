@@ -86,6 +86,7 @@ Board.prototype.combinePossibleCells = function() {
       if ( row[i].value === row[i + 1].value ) {
         row[i].increaseValue();
         this.removeCombinedTile(row[i + 1]);
+        row.splice(i + 1, 1);
         i++;
       }
     }
@@ -95,5 +96,14 @@ Board.prototype.combinePossibleCells = function() {
 Board.prototype.removeCombinedTile = function(removeTile) {
   this.tiles = this.tiles.filter(function(tile) {
     return tile.index !== removeTile.index;
+  });
+}
+
+Board.prototype.shiftTilesRight = function() {
+  this.rows.forEach(function(row) {
+    for ( var i = 0; i < row.length; i++ ) {
+      row[i].column = 3 - i;
+      row[i].setIndex();
+    }
   });
 }
