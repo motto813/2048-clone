@@ -6,7 +6,7 @@ var Board = function() {
 
   this.tiles = [];
   this.allGridCells = this.createEmptyBoard();
-  this.rows = [];
+  // this.rows = [];
 
   this.initiateGridCells();
 };
@@ -25,7 +25,7 @@ Board.prototype.populateGridCells = function() {
   this.tiles.forEach(function(tile) {
     console.log(tile);
     console.log(tile.index);
-    // console.log(allGridCells);
+    console.log(this.allGridCells);
     this.allGridCells[tile.index] = tile;
   }, this);
 }
@@ -58,14 +58,6 @@ Board.prototype.randomOpenIndex = function() {
   // });
 }
 
-// Board.prototype.occupiedGridCells = function() {
-//   var usedArr = [];
-//   this.tiles.forEach(function(tile) {
-//     usedArr.push(tile.index);
-//   });
-//   return usedArr;
-// }
-
 Board.prototype.openIndices = function() {
   // return this.gridCells.diff(this.occupiedGridCells());
   var openIndices = [];
@@ -81,6 +73,14 @@ Board.prototype.openIndices = function() {
   //   }
   // });
 }
+
+// Board.prototype.occupiedGridCells = function() {
+//   var usedArr = [];
+//   this.tiles.forEach(function(tile) {
+//     usedArr.push(tile.index);
+//   });
+//   return usedArr;
+// }
 
 // Array.prototype.diff = function(usedArr) {
 //   return this.filter(function(index) {
