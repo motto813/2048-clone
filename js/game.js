@@ -6,10 +6,15 @@ var Game = function() {
 };
 
 Game.prototype.moveGameForward = function() {
+  this.playCurrentTurn();
   this.board.addTile();
   this.board.populateGridCells();
   this.board.displayBoard();
-  // this.board.rows.length = 0;
+}
+
+Game.prototype.playCurrentTurn = function() {
+  this.board.combinePossibleCells();
+  // this.board.slideTilesInDirection();
 }
 
 Game.prototype.moveTilesRight = function() {

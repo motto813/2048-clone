@@ -13,6 +13,7 @@ Board.prototype.arrayOfZeroes = function(num) {
 
 Board.prototype.initiateGridCells = function() {
   this.addTile();
+  this.populateGridCells(); // hopefully won't need this later...
   this.addTile();
   this.populateGridCells();
 }
@@ -59,10 +60,10 @@ Board.prototype.createRowsRight = function() {
     });
     this.rows[i] = row;
   }
-  this.sortForRightAndUp();
+  this.sortForRightAndDown();
 }
 
-Board.prototype.sortForRightAndUp = function() {
+Board.prototype.sortForRightAndDown = function() {
   this.rows.map(function(row) {
     return row.sort(function(a, b) {
       return b.index - a.index;
@@ -70,10 +71,14 @@ Board.prototype.sortForRightAndUp = function() {
   });
 }
 
-Board.prototype.sortForleftAndDown = function() {
+Board.prototype.sortForleftAndUp = function() {
   this.rows.map(function(row) {
     return row.sort(function(a, b) {
       return a.index - b.index;
     });
   });
+}
+
+Board.prototype.combinePossibleCells = function() {
+  // this.rows.
 }
