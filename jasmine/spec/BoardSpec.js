@@ -139,7 +139,6 @@ describe("Board", function() {
 
       it("should create 9 tiles", function() {
         board.createTilesFromSlices("right");
-        console.log(board.tiles);
 
         expect(board.tiles.length).toEqual(9);
       });
@@ -161,7 +160,6 @@ describe("Board", function() {
 
       it("should create 9 tiles", function() {
         board.createTilesFromSlices("left");
-        console.log(board.tiles);
 
         expect(board.tiles.length).toEqual(9);
       });
@@ -183,7 +181,6 @@ describe("Board", function() {
 
       it("should create 9 tiles", function() {
         board.createTilesFromSlices("down");
-        console.log(board.tiles);
 
         expect(board.tiles.length).toEqual(9);
       });
@@ -205,7 +202,6 @@ describe("Board", function() {
 
       it("should create 9 tiles", function() {
         board.createTilesFromSlices("up");
-        console.log(board.tiles);
 
         expect(board.tiles.length).toEqual(9);
       });
