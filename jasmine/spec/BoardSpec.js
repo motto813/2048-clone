@@ -120,15 +120,78 @@ describe("Board", function() {
         expect(board.tiles.length).toEqual(9);
       });
 
-      it("should create a tile with index 6 and value 8", function() {
+      it("should create a tile with index 7 and value 16", function() {
         board.createRightTiles();
 
         var tiles = board.tiles.filter(function(tile) {
-          return tile.index === 6;
+          return tile.index === 7;
         });
 
         expect(tiles.length).toEqual(1);
-        expect(tiles[0].value).toEqual(8);
+        expect(tiles[0].value).toEqual(16);
+      });
+
+    });
+
+    describe("moving tiles left", function() {
+
+      it("should create 9 tiles", function() {
+        board.createLeftTiles();
+
+        expect(board.tiles.length).toEqual(9);
+      });
+
+      it("should create a tile with index 4 and value 16", function() {
+        board.createLeftTiles();
+
+        var tiles = board.tiles.filter(function(tile) {
+          return tile.index === 4;
+        });
+
+        expect(tiles.length).toEqual(1);
+        expect(tiles[0].value).toEqual(16);
+      });
+
+    });
+
+    describe("moving tiles down", function() {
+
+      it("should create 9 tiles", function() {
+        board.createDownTiles();
+
+        expect(board.tiles.length).toEqual(9);
+      });
+
+      it("should create a tile with index 13 and value 16", function() {
+        board.createDownTiles();
+
+        var tiles = board.tiles.filter(function(tile) {
+          return tile.index === 13;
+        });
+
+        expect(tiles.length).toEqual(1);
+        expect(tiles[0].value).toEqual(16);
+      });
+
+    });
+
+    describe("moving tiles up", function() {
+
+      it("should create 9 tiles", function() {
+        board.createUpTiles();
+
+        expect(board.tiles.length).toEqual(9);
+      });
+
+      it("should create a tile with index 1 and value 16", function() {
+        board.createUpTiles();
+
+        var tiles = board.tiles.filter(function(tile) {
+          return tile.index === 1;
+        });
+
+        expect(tiles.length).toEqual(1);
+        expect(tiles[0].value).toEqual(16);
       });
 
     });

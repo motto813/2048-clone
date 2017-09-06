@@ -121,20 +121,47 @@ Board.prototype.createRightTiles = function() {
   }
 }
 
-
 Board.prototype.createLeftTiles = function() {
   this.tiles.length = 0;
   for ( var slice = 0; slice < this.slices.length; slice++ ) {
     for ( var i = 0; i < this.slices[slice].length; i++ ) {
       var value = this.slices[slice][i];
 
-      if ( value !== 0 ) {
-        this.tiles.push(new Tile({
-                                  "row": slice,
-                                  "column": i,
-                                  "value": value
-                                }));
-      }
+      this.tiles.push(new Tile({
+                                "row": slice,
+                                "column": i,
+                                "value": value
+                              }));
+    }
+  }
+}
+
+Board.prototype.createDownTiles = function() {
+  this.tiles.length = 0;
+  for ( var slice = 0; slice < this.slices.length; slice++ ) {
+    for ( var i = 0; i < this.slices[slice].length; i++ ) {
+      var value = this.slices[slice][i];
+
+      this.tiles.push(new Tile({
+                                "row": (3 - i),
+                                "column": slice,
+                                "value": value
+                              }));
+    }
+  }
+}
+
+Board.prototype.createUpTiles = function() {
+  this.tiles.length = 0;
+  for ( var slice = 0; slice < this.slices.length; slice++ ) {
+    for ( var i = 0; i < this.slices[slice].length; i++ ) {
+      var value = this.slices[slice][i];
+
+      this.tiles.push(new Tile({
+                                "row": i,
+                                "column": slice,
+                                "value": value
+                              }));
     }
   }
 }
