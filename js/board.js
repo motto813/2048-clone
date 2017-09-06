@@ -37,7 +37,7 @@ Board.prototype.displayBoard = function() {
 }
 
 Board.prototype.addTile = function() {
-  this.tiles.push(new Tile(this.randomOpenIndex()));
+  this.tiles.push(new Tile({ "index": this.randomOpenIndex() }));
 }
 
 Board.prototype.randomOpenIndex = function() {
@@ -117,7 +117,7 @@ Board.prototype.shiftTilesRight = function() {
 
 Board.prototype.createRightTiles = function() {
   this.tiles.length = 0;
-  for ( var i = 0; i < this.slices.length; i++ ) {
+  for ( var slice = 0; i < this.slices.length; slice++ ) {
     for ( var i = 0; i < slice.length; i++ ) {
       this.tiles.push(new Tile())
     }

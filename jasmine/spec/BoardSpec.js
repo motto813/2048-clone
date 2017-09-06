@@ -1,4 +1,5 @@
 describe("Board", function() {
+  var board;
 
   beforeEach(function() {
     board = new Board();
@@ -44,13 +45,13 @@ describe("Board", function() {
 
     beforeEach(function() {
       board.tiles.length = 0;
-      board.tiles.push(new Tile(2, 4));
-      board.tiles.push(new Tile(3));
-      board.tiles.push(new Tile(0, 4));
+      board.tiles.push(new Tile({ "index": 2, "value": 4 }));
+      board.tiles.push(new Tile({ "index": 3 }));
+      board.tiles.push(new Tile({ "index": 0, "value": 4 }));
 
-      board.tiles.push(new Tile(12));
-      board.tiles.push(new Tile(8, 4));
-      board.tiles.push(new Tile(4));
+      board.tiles.push(new Tile({ "index": 12 }));
+      board.tiles.push(new Tile({ "index": 8, "value": 4 }));
+      board.tiles.push(new Tile({ "index": 4 }));
     });
 
     // describe("converting the slices", function() {
@@ -62,6 +63,7 @@ describe("Board", function() {
     it("should create a row slice for moving right with the highest index first", function() {
       board.createSlicesRight();
       // board.convertSlices();
+      console.log(board.slices[0]);
 
       expect(board.slices[0]).toEqual([ 2, 4, 4 ]);
     });
@@ -76,6 +78,7 @@ describe("Board", function() {
     it("should create a column slice for moving down with the highest index first", function() {
       board.createSlicesDown();
       // board.convertSlices();
+      console.log(board.slices[0]);
 
       expect(board.slices[0]).toEqual([ 2, 4, 2, 4 ]);
     });
