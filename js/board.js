@@ -54,14 +54,6 @@ Board.prototype.openIndices = function() {
   return openIndices;
 }
 
-Board.prototype.convertSlicesToInts = function() {
-  this.slices = this.slices.map(function(slice) {
-    return slice.map(function(cell) {
-      return cell.value;
-    });
-  });
-}
-
 Board.prototype.createSlicesRight = function() {
   for ( var i = 0; i < this.slices.length; i++ ) {
     var slice = this.tiles.filter(function(tile) {
@@ -104,6 +96,30 @@ Board.prototype.createSlicesUp = function() {
   }
   this.sortForLeftAndUp();
   this.convertSlicesToInts();
+}
+
+Board.prototype.sortForRightAndDown = function() {
+  this.slices.map(function(slice) {
+    return slice.sort(function(a, b) {
+      return b.index - a.index;
+    });
+  });
+}
+
+Board.prototype.sortForLeftAndUp = function() {
+  this.slices.map(function(slice) {
+    return slice.sort(function(a, b) {
+      return a.index - b.index;
+    });
+  });
+}
+
+Board.prototype.convertSlicesToInts = function() {
+  this.slices = this.slices.map(function(slice) {
+    return slice.map(function(cell) {
+      return cell.value;
+    });
+  });
 }
 
 Board.prototype.createRightTiles = function() {
@@ -166,22 +182,6 @@ Board.prototype.createUpTiles = function() {
   }
 }
 
-Board.prototype.sortForRightAndDown = function() {
-  this.slices.map(function(slice) {
-    return slice.sort(function(a, b) {
-      return b.index - a.index;
-    });
-  });
-}
-
-Board.prototype.sortForLeftAndUp = function() {
-  this.slices.map(function(slice) {
-    return slice.sort(function(a, b) {
-      return a.index - b.index;
-    });
-  });
-}
-
 Board.prototype.combinePossibleCells = function() {
   this.slices = this.slices.map(function(slice) {
     return this.combineSlice(slice);
@@ -193,7 +193,6 @@ Board.prototype.combineSlice = function(slice) {
     if ( slice[i] === slice[i + 1] ) {
       slice[i] *= 2;
       slice.splice(i + 1, 1);
-      i++;
     }
   }
   return slice;

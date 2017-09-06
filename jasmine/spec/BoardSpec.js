@@ -88,6 +88,30 @@ describe("Board", function() {
       expect(board.combineSlice(slice)).toEqual([ 2, 8 ]);
     });
 
+    it("should combine 2 2 2 4 into 4 2 4", function() {
+      var slice = [ 2, 2, 2, 4 ];
+
+      expect(board.combineSlice(slice)).toEqual([ 4, 2, 4 ]);
+    });
+
+    it("should combine 4 2 2 2 into 4 4 2", function() {
+      var slice = [ 4, 2, 2, 2 ];
+
+      expect(board.combineSlice(slice)).toEqual([ 4, 4, 2 ]);
+    });
+
+    it("should combine 2 2 4 4 into 4 8", function() {
+      var slice = [ 2, 2, 4, 4 ];
+
+      expect(board.combineSlice(slice)).toEqual([ 4, 8 ]);
+    });
+
+    it("should combine 2 2 2 into 4 2", function() {
+      var slice = [ 2, 2, 2 ];
+
+      expect(board.combineSlice(slice)).toEqual([ 4, 2]);
+    });
+
   });
 
   describe("populating the board from slices", function() {
