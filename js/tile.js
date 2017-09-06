@@ -1,8 +1,8 @@
-var Tile = function(index) {
+var Tile = function(index, value = 2) {
   this.index = index;
   this.row = this.getRow(index);
   this.column = this.getColumn(index);
-  this.value = 2;
+  this.value = value;
 };
 
 Tile.prototype.increaseValue = function() {

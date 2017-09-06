@@ -39,31 +39,70 @@ describe("Board", function() {
 
   describe("creating the slices", function() {
 
+    // row 0: [ 4, 0, 4, 2 ]
+    // column 0: [ 4, 2, 4, 2 ]
+
     beforeEach(function() {
       board.tiles.length = 0;
-      board.tiles.push(new Tile(2));
+      board.tiles.push(new Tile(2, 4));
       board.tiles.push(new Tile(3));
-      board.tiles.push(new Tile(0));
+      board.tiles.push(new Tile(0, 4));
 
       board.tiles.push(new Tile(12));
+      board.tiles.push(new Tile(8, 4));
       board.tiles.push(new Tile(4));
     });
 
+    // describe("converting the slices", function() {
+
+    //   it("should convert the cells to their values")
+
+    // });
+
     it("should create a row slice for moving right with the highest index first", function() {
       board.createSlicesRight();
+      // board.convertSlices();
 
-      expect(board.slices[0][0].row).toEqual(0);
-      expect(board.slices[0][0].column).toEqual(3);
-      expect(board.slices[0][0].index).toEqual(3);
+      expect(board.slices[0]).toEqual([ 2, 4, 4 ]);
+    });
+
+    it("should create a row slice for moving left with the lowest index first", function() {
+      board.createSlicesLeft();
+      // board.convertSlices();
+
+      expect(board.slices[0]).toEqual([ 4, 4, 2 ]);
     });
 
     it("should create a column slice for moving down with the highest index first", function() {
       board.createSlicesDown();
+      // board.convertSlices();
 
-      expect(board.slices[0][0].row).toEqual(3);
-      expect(board.slices[0][0].column).toEqual(0);
-      expect(board.slices[0][0].index).toEqual(12);
+      expect(board.slices[0]).toEqual([ 2, 4, 2, 4 ]);
     });
+
+    it("should create a column slice for moving up with the lowest index first", function() {
+      board.createSlicesUp();
+      // board.convertSlices();
+
+      expect(board.slices[0]).toEqual([ 4, 2, 4, 2 ]);
+    });
+
+  });
+
+  describe("combining alike cells", function() {
+
+    it("should combine 2 4 4 into 2 8", function() {
+      var slice = [ 2, 4, 4 ];
+      // this.combineSlice(slice);
+
+      expect(board.combineSlice(slice)).toEqual([ 2, 8 ]);
+    });
+
+  });
+
+  describe("populating the board from slices", function() {
+
+
 
   });
 

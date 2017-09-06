@@ -9,6 +9,9 @@ Game.prototype.moveGameForward = function() {
   this.board.addTile();
   // console.log(this.board.tiles.length);
   // console.log(this.board);
+  console.log(this.board.slices);
+  this.board.convertSlices();
+  console.log(this.board.slices);
   this.board.slices = this.board.arrayOfZeroes(4);
   this.board.populateGridCells();
   this.board.displayBoard();

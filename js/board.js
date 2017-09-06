@@ -54,6 +54,14 @@ Board.prototype.openIndices = function() {
   return openIndices;
 }
 
+Board.prototype.convertSlicesToInts = function() {
+  this.slices = this.slices.map(function(slice) {
+    return slice.map(function(cell) {
+      return cell.value;
+    });
+  });
+}
+
 Board.prototype.createSlicesRight = function() {
   for ( var i = 0; i < this.slices.length; i++ ) {
     var slice = this.tiles.filter(function(tile) {
@@ -62,6 +70,7 @@ Board.prototype.createSlicesRight = function() {
     this.slices[i] = slice;
   }
   this.sortForRightAndDown();
+  this.convertSlicesToInts();
 }
 
 Board.prototype.createSlicesLeft = function() {
@@ -72,6 +81,7 @@ Board.prototype.createSlicesLeft = function() {
     this.slices[i] = slice;
   }
   this.sortForLeftAndUp();
+  this.convertSlicesToInts();
 }
 
 Board.prototype.createSlicesDown = function() {
@@ -82,6 +92,7 @@ Board.prototype.createSlicesDown = function() {
     this.slices[i] = slice;
   }
   this.sortForRightAndDown();
+  this.convertSlicesToInts();
 }
 
 Board.prototype.createSlicesUp = function() {
@@ -92,6 +103,7 @@ Board.prototype.createSlicesUp = function() {
     this.slices[i] = slice;
   }
   this.sortForLeftAndUp();
+  this.convertSlicesToInts();
 }
 
 Board.prototype.shiftTilesRight = function() {
@@ -101,6 +113,15 @@ Board.prototype.shiftTilesRight = function() {
       slice[i].setIndex();
     }
   });
+}
+
+Board.prototype.createRightTiles = function() {
+  this.tiles.length = 0;
+  for ( var i = 0; i < this.slices.length; i++ ) {
+    for ( var i = 0; i < slice.length; i++ ) {
+      this.tiles.push(new Tile())
+    }
+  }
 }
 
 Board.prototype.shiftTilesLeft = function() {
@@ -147,22 +168,34 @@ Board.prototype.sortForLeftAndUp = function() {
 }
 
 Board.prototype.combinePossibleCells = function() {
-  this.slices.forEach(function(slice) {
-    for ( var i = 0; i < slice.length - 1; i++ ) {
-      if ( slice[i].value === slice[i + 1].value ) {
-        slice[i].increaseValue();
-        this.removeCombinedTile(slice[i + 1]);
-        // console.log(this.allGridCells);
-        console.log("current tiles below");
-        console.log(slice[i]);
-        console.log(slice[i + 1]);
-        // this.allGridCells.splice(slice[i + 1].index, 1, 0);
-        // console.log(this.allGridCells);
-        // slice.splice(i + 1, 1);
-        i++;
-      }
-    }
+  this.slices = this.slices.map(function(slice) {
+    // for ( var i = 0; i < slice.length - 1; i++ ) {
+    //   if ( slice[i].value === slice[i + 1].value ) {
+    //     slice[i].increaseValue();
+    //     this.removeCombinedTile(slice[i + 1]);
+    //     // console.log(this.allGridCells);
+    //     console.log("current tiles below");
+    //     console.log(slice[i]);
+    //     console.log(slice[i + 1]);
+    //     // this.allGridCells.splice(slice[i + 1].index, 1, 0);
+    //     // console.log(this.allGridCells);
+    //     // slice.splice(i + 1, 1);
+    //     i++;
+    //   }
+    // }
+    return this.combineSlice(slice);
   }, this);
+}
+
+Board.prototype.combineSlice = function(slice) {
+  for ( var i = 0; i < slice.length - 1; i++ ) {
+    if ( slice[i] === slice[i + 1] ) {
+      slice[i] *= 2;
+      slice.splice(i + 1, 1);
+      i++;
+    }
+  }
+  return slice;
 }
 
 Board.prototype.removeCombinedTile = function(removeTile) {
