@@ -5,36 +5,40 @@ var Game = function() {
 
 Game.prototype.moveGameForward = function() {
   this.board.populateGridCells();
-  this.board.addTile();
+  this.board.addRandomTile();
   this.board.slices = this.board.arrayOfZeroes(4);
   new View(this.board.tiles);
 }
 
 Game.prototype.moveTilesRight = function() {
-  this.board.createSlicesRight();
-  this.board.combinePossibleCells();
-  this.board.createRightTiles();
+  // this.board.createSlicesRight();
+  // this.board.combinePossibleCells();
+  // this.board.createRightTiles();
+  this.board.updateBoard("right");
   this.moveGameForward();
 }
 
 Game.prototype.moveTilesLeft = function() {
-  this.board.createSlicesLeft();
-  this.board.combinePossibleCells();
-  this.board.createLeftTiles();
+  // this.board.createSlicesLeft();
+  // this.board.combinePossibleCells();
+  // this.board.createLeftTiles();
+  this.board.updateBoard("left");
   this.moveGameForward();
 }
 
 Game.prototype.moveTilesDown = function() {
-  this.board.createSlicesDown();
-  this.board.combinePossibleCells();
-  this.board.createDownTiles();
+  // this.board.createSlicesDown();
+  // this.board.combinePossibleCells();
+  // this.board.createDownTiles();
+  this.board.updateBoard("down");
   this.moveGameForward();
 }
 
 Game.prototype.moveTilesUp = function() {
-  this.board.createSlicesUp();
-  this.board.combinePossibleCells();
-  this.board.createUpTiles();
+  // this.board.createSlicesUp();
+  // this.board.combinePossibleCells();
+  // this.board.createUpTiles();
+  this.board.updateBoard("up");
   this.moveGameForward();
 }
 

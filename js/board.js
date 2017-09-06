@@ -12,9 +12,9 @@ Board.prototype.arrayOfZeroes = function(num) {
 }
 
 Board.prototype.initiateGridCells = function() {
-  this.addTile();
+  this.addRandomTile();
   this.populateGridCells(); // hopefully won't need this later...
-  this.addTile();
+  this.addRandomTile();
   this.populateGridCells();
 }
 
@@ -25,7 +25,7 @@ Board.prototype.populateGridCells = function() {
   }, this);
 }
 
-Board.prototype.addTile = function() {
+Board.prototype.addRandomTile = function() {
   this.tiles.push(new Tile({ "index": this.randomOpenIndex() }));
 }
 
@@ -43,48 +43,67 @@ Board.prototype.openIndices = function() {
   return openIndices;
 }
 
-Board.prototype.createSlicesRight = function() {
+Board.prototype.updateBoard = function(direction) {
+  this.createSlices(direction);
+  this.combinePossibleCells();
+  this.createTilesFromSlices(direction);
+}
+
+Board.prototype.createSlices = function(direction) {
+  var slice;
   for ( var i = 0; i < this.slices.length; i++ ) {
-    var slice = this.tiles.filter(function(tile) {
-      return tile.row === i;
+    slice = this.tiles.filter(function(tile) {
+      if ( direction === "right" || direction === "left" ) {
+        return tile.row === i;
+      } else if ( direction === "down" || direction === "up" ) {
+        return tile.column === i;
+      }
     });
     this.slices[i] = slice;
   }
-  this.sortForRightAndDown();
+  if ( direction === "right" || direction === "down" ) {
+    this.sortForRightAndDown();
+  } else if ( direction === "left" || direction === "up" ) {
+    this.sortForLeftAndUp();
+  }
   this.convertSlicesToInts();
 }
 
-Board.prototype.createSlicesLeft = function() {
-  for ( var i = 0; i < this.slices.length; i++ ) {
-    var slice = this.tiles.filter(function(tile) {
-      return tile.row === i;
-    });
-    this.slices[i] = slice;
+Board.prototype.createTilesFromSlices = function(direction) {
+  this.tiles.length = 0;
+  for ( var slice = 0; slice < this.slices.length; slice++ ) {
+    for ( var i = 0; i < this.slices[slice].length; i++ ) {
+      var value = this.slices[slice][i];
+      this.addTileFromSlice(direction, slice, i, value);
+    }
   }
-  this.sortForLeftAndUp();
-  this.convertSlicesToInts();
 }
 
-Board.prototype.createSlicesDown = function() {
-  for ( var i = 0; i < this.slices.length; i++ ) {
-    var slice = this.tiles.filter(function(tile) {
-      return tile.column === i;
-    });
-    this.slices[i] = slice;
+Board.prototype.addTileFromSlice = function(direction, slice, index, value) {
+  var row;
+  var column;
+  switch ( direction ) {
+    case "right":
+      row = slice;
+      column = 3 - index;
+      break;
+    case "left":
+      row = slice;
+      column = index;
+      break;
+    case "down":
+      row = 3 - index;
+      column = slice;
+      break;
+    case "up":
+      row = index;
+      column = slice;
   }
-  this.sortForRightAndDown();
-  this.convertSlicesToInts();
-}
-
-Board.prototype.createSlicesUp = function() {
-  for ( var i = 0; i < this.slices.length; i++ ) {
-    var slice = this.tiles.filter(function(tile) {
-      return tile.column === i;
-    });
-    this.slices[i] = slice;
-  }
-  this.sortForLeftAndUp();
-  this.convertSlicesToInts();
+  this.tiles.push(new Tile({
+                            "row": row,
+                            "column": column,
+                            "value": value
+                          }));
 }
 
 Board.prototype.sortForRightAndDown = function() {
@@ -111,65 +130,109 @@ Board.prototype.convertSlicesToInts = function() {
   });
 }
 
-Board.prototype.createRightTiles = function() {
-  this.tiles.length = 0;
-  for ( var slice = 0; slice < this.slices.length; slice++ ) {
-    for ( var i = 0; i < this.slices[slice].length; i++ ) {
-      var value = this.slices[slice][i];
+// Board.prototype.createSlicesRight = function() {
+//   for ( var i = 0; i < this.slices.length; i++ ) {
+//     var slice = this.tiles.filter(function(tile) {
+//       return tile.row === i;
+//     });
+//     this.slices[i] = slice;
+//   }
+//   this.sortForRightAndDown();
+//   this.convertSlicesToInts();
+// }
 
-      this.tiles.push(new Tile({
-                                "row": slice,
-                                "column": (3 - i),
-                                "value": value
-                              }));
-    }
-  }
-}
+// Board.prototype.createSlicesLeft = function() {
+//   for ( var i = 0; i < this.slices.length; i++ ) {
+//     var slice = this.tiles.filter(function(tile) {
+//       return tile.row === i;
+//     });
+//     this.slices[i] = slice;
+//   }
+//   this.sortForLeftAndUp();
+//   this.convertSlicesToInts();
+// }
 
-Board.prototype.createLeftTiles = function() {
-  this.tiles.length = 0;
-  for ( var slice = 0; slice < this.slices.length; slice++ ) {
-    for ( var i = 0; i < this.slices[slice].length; i++ ) {
-      var value = this.slices[slice][i];
+// Board.prototype.createSlicesDown = function() {
+//   for ( var i = 0; i < this.slices.length; i++ ) {
+//     var slice = this.tiles.filter(function(tile) {
+//       return tile.column === i;
+//     });
+//     this.slices[i] = slice;
+//   }
+//   this.sortForRightAndDown();
+//   this.convertSlicesToInts();
+// }
 
-      this.tiles.push(new Tile({
-                                "row": slice,
-                                "column": i,
-                                "value": value
-                              }));
-    }
-  }
-}
+// Board.prototype.createSlicesUp = function() {
+//   for ( var i = 0; i < this.slices.length; i++ ) {
+//     var slice = this.tiles.filter(function(tile) {
+//       return tile.column === i;
+//     });
+//     this.slices[i] = slice;
+//   }
+//   this.sortForLeftAndUp();
+//   this.convertSlicesToInts();
+// }
 
-Board.prototype.createDownTiles = function() {
-  this.tiles.length = 0;
-  for ( var slice = 0; slice < this.slices.length; slice++ ) {
-    for ( var i = 0; i < this.slices[slice].length; i++ ) {
-      var value = this.slices[slice][i];
+// Board.prototype.createRightTiles = function() {
+//   this.tiles.length = 0;
+//   for ( var slice = 0; slice < this.slices.length; slice++ ) {
+//     for ( var i = 0; i < this.slices[slice].length; i++ ) {
+//       var value = this.slices[slice][i];
 
-      this.tiles.push(new Tile({
-                                "row": (3 - i),
-                                "column": slice,
-                                "value": value
-                              }));
-    }
-  }
-}
+//       this.tiles.push(new Tile({
+//                                 "row": slice,
+//                                 "column": (3 - i),
+//                                 "value": value
+//                               }));
+//     }
+//   }
+// }
 
-Board.prototype.createUpTiles = function() {
-  this.tiles.length = 0;
-  for ( var slice = 0; slice < this.slices.length; slice++ ) {
-    for ( var i = 0; i < this.slices[slice].length; i++ ) {
-      var value = this.slices[slice][i];
+// Board.prototype.createLeftTiles = function() {
+//   this.tiles.length = 0;
+//   for ( var slice = 0; slice < this.slices.length; slice++ ) {
+//     for ( var i = 0; i < this.slices[slice].length; i++ ) {
+//       var value = this.slices[slice][i];
 
-      this.tiles.push(new Tile({
-                                "row": i,
-                                "column": slice,
-                                "value": value
-                              }));
-    }
-  }
-}
+//       this.tiles.push(new Tile({
+//                                 "row": slice,
+//                                 "column": i,
+//                                 "value": value
+//                               }));
+//     }
+//   }
+// }
+
+// Board.prototype.createDownTiles = function() {
+//   this.tiles.length = 0;
+//   for ( var slice = 0; slice < this.slices.length; slice++ ) {
+//     for ( var i = 0; i < this.slices[slice].length; i++ ) {
+//       var value = this.slices[slice][i];
+
+//       this.tiles.push(new Tile({
+//                                 "row": (3 - i),
+//                                 "column": slice,
+//                                 "value": value
+//                               }));
+//     }
+//   }
+// }
+
+// Board.prototype.createUpTiles = function() {
+//   this.tiles.length = 0;
+//   for ( var slice = 0; slice < this.slices.length; slice++ ) {
+//     for ( var i = 0; i < this.slices[slice].length; i++ ) {
+//       var value = this.slices[slice][i];
+
+//       this.tiles.push(new Tile({
+//                                 "row": i,
+//                                 "column": slice,
+//                                 "value": value
+//                               }));
+//     }
+//   }
+// }
 
 Board.prototype.combinePossibleCells = function() {
   this.slices = this.slices.map(function(slice) {

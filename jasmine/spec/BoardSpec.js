@@ -55,25 +55,25 @@ describe("Board", function() {
     });
 
     it("should create a row slice for moving right with the highest index first", function() {
-      board.createSlicesRight();
+      board.createSlices("right");
 
       expect(board.slices[0]).toEqual([ 2, 4, 4 ]);
     });
 
     it("should create a row slice for moving left with the lowest index first", function() {
-      board.createSlicesLeft();
+      board.createSlices("left");
 
       expect(board.slices[0]).toEqual([ 4, 4, 2 ]);
     });
 
     it("should create a column slice for moving down with the highest index first", function() {
-      board.createSlicesDown();
+      board.createSlices("down");
 
       expect(board.slices[0]).toEqual([ 2, 4, 2, 4 ]);
     });
 
     it("should create a column slice for moving up with the lowest index first", function() {
-      board.createSlicesUp();
+      board.createSlices("up");
 
       expect(board.slices[0]).toEqual([ 4, 2, 4, 2 ]);
     });
@@ -138,13 +138,14 @@ describe("Board", function() {
     describe("moving tiles right", function() {
 
       it("should create 9 tiles", function() {
-        board.createRightTiles();
+        board.createTilesFromSlices("right");
+        console.log(board.tiles);
 
         expect(board.tiles.length).toEqual(9);
       });
 
       it("should create a tile with index 7 and value 16", function() {
-        board.createRightTiles();
+        board.createTilesFromSlices("right");
 
         var tiles = board.tiles.filter(function(tile) {
           return tile.index === 7;
@@ -159,13 +160,14 @@ describe("Board", function() {
     describe("moving tiles left", function() {
 
       it("should create 9 tiles", function() {
-        board.createLeftTiles();
+        board.createTilesFromSlices("left");
+        console.log(board.tiles);
 
         expect(board.tiles.length).toEqual(9);
       });
 
       it("should create a tile with index 4 and value 16", function() {
-        board.createLeftTiles();
+        board.createTilesFromSlices("left");
 
         var tiles = board.tiles.filter(function(tile) {
           return tile.index === 4;
@@ -180,13 +182,14 @@ describe("Board", function() {
     describe("moving tiles down", function() {
 
       it("should create 9 tiles", function() {
-        board.createDownTiles();
+        board.createTilesFromSlices("down");
+        console.log(board.tiles);
 
         expect(board.tiles.length).toEqual(9);
       });
 
       it("should create a tile with index 13 and value 16", function() {
-        board.createDownTiles();
+        board.createTilesFromSlices("down");
 
         var tiles = board.tiles.filter(function(tile) {
           return tile.index === 13;
@@ -201,13 +204,14 @@ describe("Board", function() {
     describe("moving tiles up", function() {
 
       it("should create 9 tiles", function() {
-        board.createUpTiles();
+        board.createTilesFromSlices("up");
+        console.log(board.tiles);
 
         expect(board.tiles.length).toEqual(9);
       });
 
       it("should create a tile with index 1 and value 16", function() {
-        board.createUpTiles();
+        board.createTilesFromSlices("up");
 
         var tiles = board.tiles.filter(function(tile) {
           return tile.index === 1;
