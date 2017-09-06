@@ -1,45 +1,46 @@
-var moveRightEndPoints = [3, 7, 11, 15];
-
 var Game = function() {
   this.board = new Board();
-  this.board.displayBoard();
+  new View(this.board.tiles);
+};
+
+Game.prototype.moveGameForward = function() {
+  this.board.populateGridCells();
+  this.board.addTile();
+  this.board.slices = this.board.arrayOfZeroes(4);
+  new View(this.board.tiles);
 }
 
 Game.prototype.moveTilesRight = function() {
-  // increase index of all tiles by one UNTIL
-    // it hits index 3, 7, 11, 15
-    // it hits the tile before a tile with a value DIFFERENT
-    // it hits a tile with the SAME value as it
-  console.log(this);
-  var board = this.board;
-  board.tiles.forEach(function(tile) {
-    while (true) {
-      if ( moveRightEndPoints.includes(tile.index) ) {
-        break;
-      } else if ( board.occupiedGridCells().includes(tile.index + 1) ) {
-        if ( board.tiles[tile.index + 1].value === tile.value ) {
-          console.log("combine them!");
-        } else {
-          console.log("tile is blocking me");
-          break;
-        }
-      }
-      tile.index ++;
-    }
-  });
-  board.displayBoard();
+  this.board.createSlicesRight();
+  this.board.combinePossibleCells();
+  this.board.createRightTiles();
+  this.moveGameForward();
 }
 
 Game.prototype.moveTilesLeft = function() {
-
-}
-
-Game.prototype.moveTilesUp = function() {
-
+  this.board.createSlicesLeft();
+  this.board.combinePossibleCells();
+  this.board.createLeftTiles();
+  this.moveGameForward();
 }
 
 Game.prototype.moveTilesDown = function() {
+  this.board.createSlicesDown();
+  this.board.combinePossibleCells();
+  this.board.createDownTiles();
+  this.moveGameForward();
+}
 
+Game.prototype.moveTilesUp = function() {
+  this.board.createSlicesUp();
+  this.board.combinePossibleCells();
+  this.board.createUpTiles();
+  this.moveGameForward();
+}
+
+Game.prototype.checkIfGameOver = function() {
+  // IF the tile count is 16 or more AND there is nothing to combine
+    // tell View to display game over
 }
 
 

@@ -1,13 +1,13 @@
-var Tile = function(index) {
-  this.index = index;
-  this.row = this.getRow(index);
-  this.column = this.getColumn(index);
-  this.value = 2;
-}
+var Tile = function(args) {
+  args = args || {};
 
-Tile.prototype.increaseValue = function() {
-  this.value *= 2;
-}
+  _.defaults( args, { "index": this.getIndex(args.row, args.column), "row": this.getRow(args.index), "column": this.getColumn(args.index), value: 2 } );
+
+  this.index = args.index;
+  this.row = args.row;
+  this.column = args.column;
+  this.value = args.value;
+};
 
 Tile.prototype.getRow = function(index) {
   return Math.floor(index / 4);
@@ -15,4 +15,8 @@ Tile.prototype.getRow = function(index) {
 
 Tile.prototype.getColumn = function(index) {
   return index % 4;
+}
+
+Tile.prototype.getIndex = function(row, column) {
+  return row * 4 + column;
 }
