@@ -21,15 +21,30 @@ describe("Tile", function() {
 
   });
 
+  describe("passing in 0 for the index", function() {
+    var tile;
+
+    beforeEach(function() {
+      tile = new Tile({ "index": 0 });
+    })
+
+    it("should have an index of 0", function() {
+      expect(tile.index).toEqual(0);
+    });
+
+  });
+
   describe("creating from a row, column, and value", function() {
     var tile;
 
     beforeEach(function() {
-      tile = new Tile({ "row": 2, "column": 3, "value": 16 })
+      tile = new Tile({ "row": 0, "column": 3, "value": 16 })
     });
 
     it("should have an index of 11", function() {
-      expect(tile.index).toEqual(11);
+      console.log(tile.row);
+      console.log(tile.index);
+      expect(tile.index).toEqual(3);
     });
 
     it("should have a value of 16", function() {

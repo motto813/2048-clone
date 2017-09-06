@@ -69,8 +69,10 @@ describe("Board", function() {
     });
 
     it("should create a row slice for moving left with the lowest index first", function() {
+      console.log(board.tiles);
       board.createSlicesLeft();
       // board.convertSlices();
+      console.log(board.slices[0]);
 
       expect(board.slices[0]).toEqual([ 4, 4, 2 ]);
     });
@@ -86,6 +88,7 @@ describe("Board", function() {
     it("should create a column slice for moving up with the lowest index first", function() {
       board.createSlicesUp();
       // board.convertSlices();
+      console.log(board.slices[0]);
 
       expect(board.slices[0]).toEqual([ 4, 2, 4, 2 ]);
     });

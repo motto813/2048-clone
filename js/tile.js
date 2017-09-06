@@ -1,9 +1,10 @@
 var Tile = function(args) {
   args = args || {};
-  this.index = args.index || this.getIndex(args.row, args.column);
-  this.row = args.row || this.getRow(args.index);
-  this.column = args.column || this.getColumn(args.index);
-  this.value = args.value || 2;
+  _.defaults( args, { index: this.getIndex(args.row, args.column), row: this.getRow(args.index), column: this.getColumn(args.index), value: 2 } );
+  this.index = args.index;
+  this.row = args.row;
+  this.column = args.column;
+  this.value = args.value;
 };
 
 Tile.prototype.increaseValue = function() {
