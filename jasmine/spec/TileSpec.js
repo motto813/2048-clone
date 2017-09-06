@@ -41,9 +41,7 @@ describe("Tile", function() {
       tile = new Tile({ "row": 0, "column": 3, "value": 16 })
     });
 
-    it("should have an index of 11", function() {
-      console.log(tile.row);
-      console.log(tile.index);
+    it("should have an index of 3", function() {
       expect(tile.index).toEqual(3);
     });
 

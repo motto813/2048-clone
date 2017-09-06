@@ -106,50 +106,74 @@ Board.prototype.createSlicesUp = function() {
   this.convertSlicesToInts();
 }
 
-Board.prototype.shiftTilesRight = function() {
-  this.slices.forEach(function(slice) {
-    for ( var i = 0; i < slice.length; i++ ) {
-      slice[i].column = 3 - i;
-      slice[i].setIndex();
-    }
-  });
-}
-
 Board.prototype.createRightTiles = function() {
   this.tiles.length = 0;
-  for ( var slice = 0; i < this.slices.length; slice++ ) {
-    for ( var i = 0; i < slice.length; i++ ) {
-      this.tiles.push(new Tile())
+  for ( var slice = 0; slice < this.slices.length; slice++ ) {
+    for ( var i = 0; i < this.slices[slice].length; i++ ) {
+      var value = this.slices[slice][i];
+
+      this.tiles.push(new Tile({
+                                "row": slice,
+                                "column": (3 - i),
+                                "value": value
+                              }));
     }
   }
 }
 
-Board.prototype.shiftTilesLeft = function() {
-  this.slices.forEach(function(slice) {
-    for ( var i = 0; i < slice.length; i++ ) {
-      slice[i].column = i;
-      slice[i].setIndex();
+
+Board.prototype.createLeftTiles = function() {
+  this.tiles.length = 0;
+  for ( var slice = 0; slice < this.slices.length; slice++ ) {
+    for ( var i = 0; i < this.slices[slice].length; i++ ) {
+      var value = this.slices[slice][i];
+
+      if ( value !== 0 ) {
+        this.tiles.push(new Tile({
+                                  "row": slice,
+                                  "column": i,
+                                  "value": value
+                                }));
+      }
     }
-  });
+  }
 }
 
-Board.prototype.shiftTilesDown = function() {
-  this.slices.forEach(function(slice) {
-    for ( var i = 0; i < slice.length; i++ ) {
-      slice[i].row = 3 - i;
-      slice[i].setIndex();
-    }
-  });
-}
+// Board.prototype.shiftTilesRight = function() {
+//   this.slices.forEach(function(slice) {
+//     for ( var i = 0; i < slice.length; i++ ) {
+//       slice[i].column = 3 - i;
+//       slice[i].setIndex();
+//     }
+//   });
+// }
 
-Board.prototype.shiftTilesUp = function() {
-  this.slices.forEach(function(slice) {
-    for ( var i = 0; i < slice.length; i++ ) {
-      slice[i].row = i;
-      slice[i].setIndex();
-    }
-  });
-}
+// Board.prototype.shiftTilesLeft = function() {
+//   this.slices.forEach(function(slice) {
+//     for ( var i = 0; i < slice.length; i++ ) {
+//       slice[i].column = i;
+//       slice[i].setIndex();
+//     }
+//   });
+// }
+
+// Board.prototype.shiftTilesDown = function() {
+//   this.slices.forEach(function(slice) {
+//     for ( var i = 0; i < slice.length; i++ ) {
+//       slice[i].row = 3 - i;
+//       slice[i].setIndex();
+//     }
+//   });
+// }
+
+// Board.prototype.shiftTilesUp = function() {
+//   this.slices.forEach(function(slice) {
+//     for ( var i = 0; i < slice.length; i++ ) {
+//       slice[i].row = i;
+//       slice[i].setIndex();
+//     }
+//   });
+// }
 
 Board.prototype.sortForRightAndDown = function() {
   this.slices.map(function(slice) {
@@ -198,9 +222,9 @@ Board.prototype.combineSlice = function(slice) {
   return slice;
 }
 
-Board.prototype.removeCombinedTile = function(removeTile) {
-  this.tiles = this.tiles.filter(function(tile) {
-    return tile.index !== removeTile.index;
-  });
-  this.allGridCells.splice(removeTile.index, 1, 0);
-}
+// Board.prototype.removeCombinedTile = function(removeTile) {
+//   this.tiles = this.tiles.filter(function(tile) {
+//     return tile.index !== removeTile.index;
+//   });
+//   this.allGridCells.splice(removeTile.index, 1, 0);
+// }

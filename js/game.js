@@ -4,28 +4,21 @@ var Game = function() {
 };
 
 Game.prototype.moveGameForward = function() {
-  // this.playCurrentTurn();
-  // console.log(this.board.tiles.length);
-  this.board.addTile();
-  // console.log(this.board.tiles.length);
-  // console.log(this.board);
-  console.log(this.board.slices);
-  this.board.convertSlices();
-  console.log(this.board.slices);
-  this.board.slices = this.board.arrayOfZeroes(4);
   this.board.populateGridCells();
+  this.board.addTile();
+  this.board.slices = this.board.arrayOfZeroes(4);
   this.board.displayBoard();
 }
 
-Game.prototype.playCurrentTurn = function() {
-  this.board.combinePossibleCells();
-  this.board.shiftTiles();
-}
+// Game.prototype.playCurrentTurn = function() {
+//   this.board.combinePossibleCells();
+//   this.board.shiftTiles();
+// }
 
 Game.prototype.moveTilesRight = function() {
   this.board.createSlicesRight();
   this.board.combinePossibleCells();
-  this.board.shiftTilesRight();
+  this.board.createRightTiles();
   this.moveGameForward();
 }
 

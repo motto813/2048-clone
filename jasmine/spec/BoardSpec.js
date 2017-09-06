@@ -62,33 +62,24 @@ describe("Board", function() {
 
     it("should create a row slice for moving right with the highest index first", function() {
       board.createSlicesRight();
-      // board.convertSlices();
-      console.log(board.slices[0]);
 
       expect(board.slices[0]).toEqual([ 2, 4, 4 ]);
     });
 
     it("should create a row slice for moving left with the lowest index first", function() {
-      console.log(board.tiles);
       board.createSlicesLeft();
-      // board.convertSlices();
-      console.log(board.slices[0]);
 
       expect(board.slices[0]).toEqual([ 4, 4, 2 ]);
     });
 
     it("should create a column slice for moving down with the highest index first", function() {
       board.createSlicesDown();
-      // board.convertSlices();
-      console.log(board.slices[0]);
 
       expect(board.slices[0]).toEqual([ 2, 4, 2, 4 ]);
     });
 
     it("should create a column slice for moving up with the lowest index first", function() {
       board.createSlicesUp();
-      // board.convertSlices();
-      console.log(board.slices[0]);
 
       expect(board.slices[0]).toEqual([ 4, 2, 4, 2 ]);
     });
@@ -108,7 +99,39 @@ describe("Board", function() {
 
   describe("populating the board from slices", function() {
 
+    beforeEach(function() {
+      board.slices = [
+                      [ 4, 2, 2 ],
+                      [ 16, 8 ],
+                      [ 4, 2 ],
+                      [ 2, 4 ]
+                     ];
+    });
 
+    afterEach(function() {
+      board.slices.length = 0;
+    });
+
+    describe("moving tiles right", function() {
+
+      it("should create 9 tiles", function() {
+        board.createRightTiles();
+
+        expect(board.tiles.length).toEqual(9);
+      });
+
+      it("should create a tile with index 6 and value 8", function() {
+        board.createRightTiles();
+
+        var tiles = board.tiles.filter(function(tile) {
+          return tile.index === 6;
+        });
+
+        expect(tiles.length).toEqual(1);
+        expect(tiles[0].value).toEqual(8);
+      });
+
+    });
 
   });
 
