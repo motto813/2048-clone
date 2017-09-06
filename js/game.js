@@ -38,6 +38,11 @@ Game.prototype.moveTilesUp = function() {
   this.moveGameForward();
 }
 
+Game.prototype.checkIfGameOver = function() {
+  // IF the tile count is 16 or more AND there is nothing to combine
+    // tell View to display game over
+}
+
 
 // Possible functions
 // game over?

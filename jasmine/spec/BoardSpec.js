@@ -112,6 +112,12 @@ describe("Board", function() {
       expect(board.combineSlice(slice)).toEqual([ 4, 2]);
     });
 
+    it("should combine 2 2 2 2 into 4 4", function() {
+      var slice = [ 2, 2, 2, 2 ];
+
+      expect(board.combineSlice(slice)).toEqual([ 4, 4 ]);
+    })
+
   });
 
   describe("populating the board from slices", function() {
