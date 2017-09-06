@@ -25,17 +25,6 @@ Board.prototype.populateGridCells = function() {
   }, this);
 }
 
-Board.prototype.nukeBoard = function() {
-  $('.grid-cell').html('');
-}
-
-Board.prototype.displayBoard = function() {
-  this.nukeBoard();
-  this.tiles.forEach(function(tile) {
-    $('#' + tile.index).html(tile.value);
-  });
-}
-
 Board.prototype.addTile = function() {
   this.tiles.push(new Tile({ "index": this.randomOpenIndex() }));
 }

@@ -1,13 +1,13 @@
 var Game = function() {
   this.board = new Board();
-  this.board.displayBoard();
+  new View(this.board.tiles);
 };
 
 Game.prototype.moveGameForward = function() {
   this.board.populateGridCells();
   this.board.addTile();
   this.board.slices = this.board.arrayOfZeroes(4);
-  this.board.displayBoard();
+  new View(this.board.tiles);
 }
 
 Game.prototype.moveTilesRight = function() {
