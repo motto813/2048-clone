@@ -166,42 +166,6 @@ Board.prototype.createUpTiles = function() {
   }
 }
 
-// Board.prototype.shiftTilesRight = function() {
-//   this.slices.forEach(function(slice) {
-//     for ( var i = 0; i < slice.length; i++ ) {
-//       slice[i].column = 3 - i;
-//       slice[i].setIndex();
-//     }
-//   });
-// }
-
-// Board.prototype.shiftTilesLeft = function() {
-//   this.slices.forEach(function(slice) {
-//     for ( var i = 0; i < slice.length; i++ ) {
-//       slice[i].column = i;
-//       slice[i].setIndex();
-//     }
-//   });
-// }
-
-// Board.prototype.shiftTilesDown = function() {
-//   this.slices.forEach(function(slice) {
-//     for ( var i = 0; i < slice.length; i++ ) {
-//       slice[i].row = 3 - i;
-//       slice[i].setIndex();
-//     }
-//   });
-// }
-
-// Board.prototype.shiftTilesUp = function() {
-//   this.slices.forEach(function(slice) {
-//     for ( var i = 0; i < slice.length; i++ ) {
-//       slice[i].row = i;
-//       slice[i].setIndex();
-//     }
-//   });
-// }
-
 Board.prototype.sortForRightAndDown = function() {
   this.slices.map(function(slice) {
     return slice.sort(function(a, b) {
@@ -220,20 +184,6 @@ Board.prototype.sortForLeftAndUp = function() {
 
 Board.prototype.combinePossibleCells = function() {
   this.slices = this.slices.map(function(slice) {
-    // for ( var i = 0; i < slice.length - 1; i++ ) {
-    //   if ( slice[i].value === slice[i + 1].value ) {
-    //     slice[i].increaseValue();
-    //     this.removeCombinedTile(slice[i + 1]);
-    //     // console.log(this.allGridCells);
-    //     console.log("current tiles below");
-    //     console.log(slice[i]);
-    //     console.log(slice[i + 1]);
-    //     // this.allGridCells.splice(slice[i + 1].index, 1, 0);
-    //     // console.log(this.allGridCells);
-    //     // slice.splice(i + 1, 1);
-    //     i++;
-    //   }
-    // }
     return this.combineSlice(slice);
   }, this);
 }
@@ -248,10 +198,3 @@ Board.prototype.combineSlice = function(slice) {
   }
   return slice;
 }
-
-// Board.prototype.removeCombinedTile = function(removeTile) {
-//   this.tiles = this.tiles.filter(function(tile) {
-//     return tile.index !== removeTile.index;
-//   });
-//   this.allGridCells.splice(removeTile.index, 1, 0);
-// }

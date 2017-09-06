@@ -54,12 +54,6 @@ describe("Board", function() {
       board.tiles.push(new Tile({ "index": 4 }));
     });
 
-    // describe("converting the slices", function() {
-
-    //   it("should convert the cells to their values")
-
-    // });
-
     it("should create a row slice for moving right with the highest index first", function() {
       board.createSlicesRight();
 
@@ -90,7 +84,6 @@ describe("Board", function() {
 
     it("should combine 2 4 4 into 2 8", function() {
       var slice = [ 2, 4, 4 ];
-      // this.combineSlice(slice);
 
       expect(board.combineSlice(slice)).toEqual([ 2, 8 ]);
     });
